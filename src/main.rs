@@ -4,25 +4,26 @@
 // of the temperature and the corresponding abbreviation, and prints 
 // the converted temp.
 //
-// Instructions: There is no direct user interaction, to change the desired temp, change the value of 'temp'.
+// Instructions: Type in a temperature (23) followed by (C or F) and the program will convert it (C to F) or (F to C).
 use std::{io, str::SplitWhitespace};
 
 fn main() {
+    //string that will hold the input
     let mut user_input: String = String::new();
 	
     println!("Please type a temperature and then F/C (ex: 23 F)");
 	
+    //getting user input
     io::stdin()
 		.read_line(&mut user_input)
 		.expect("Failed to read line");
 	
+    //This splits the input into SplitWhitespace (a vector) so it can be changed into a tuple
     let mut parts: SplitWhitespace = user_input.split_whitespace();
+    
     //defines 'temp' as a tuple of the float of the temp and the corresponding abbreviation as a char.
-    
     let temp_int: f32 = parts.next().unwrap().parse().expect("Failed to parse integer");
-    
     let temp_char: char = parts.next().unwrap().chars().next().expect("Failed to get char");
-
     let temp: (f32, char) = (temp_int.clone(), temp_char.clone());
 
     //checks whether the abbreviation is F or C
