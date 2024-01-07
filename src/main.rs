@@ -5,11 +5,25 @@
 // the converted temp.
 //
 // Instructions: There is no direct user interaction, to change the desired temp, change the value of 'temp'.
-
+use std::{io, str::SplitWhitespace};
 
 fn main() {
+    let mut user_input: String = String::new();
+	
+    println!("Please type a temperature and then F/C (ex: 23 F)");
+	
+    io::stdin()
+		.read_line(&mut user_input)
+		.expect("Failed to read line");
+	
+    let mut parts: SplitWhitespace = user_input.split_whitespace();
     //defines 'temp' as a tuple of the float of the temp and the corresponding abbreviation as a char.
-    let temp: (f32, char) = (-12.0,'C');
+    
+    let temp_int: f32 = parts.next().unwrap().parse().expect("Failed to parse integer");
+    
+    let temp_char: char = parts.next().unwrap().chars().next().expect("Failed to get char");
+
+    let temp: (f32, char) = (temp_int.clone(), temp_char.clone());
 
     //checks whether the abbreviation is F or C
     if temp.1 == 'F' {
